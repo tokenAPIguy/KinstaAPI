@@ -16,22 +16,20 @@ siteIdButton.addEventListener("click", () => {
   fetchSiteByID(siteId);
 });
 
-// Clear Cache
-const clearCacheInput = document.getElementById("clearCacheInput");
+// Environment Actions
+const envIdInput = document.getElementById("envID");
+
 const clearCacheButton = document.getElementById("clearCache");
+const restartPHPButton = document.getElementById("restartPHP");
 
 clearCacheButton.addEventListener("click", () => {
-  const envId = clearCacheInput.value;
-  console.log(envId);
+  const envId = envIdInput.value;
+  console.log(`Env: ${envId}`);
   clearKinstaCache(envId);
 });
 
-// Restart PHP
-const restartPHPInput = document.getElementById("restartPHPInput");
-const restartPHPButton = document.getElementById("restartPHP");
-
 restartPHPButton.addEventListener("click", () => {
-  const envId = restartPHPInput.value;
-  console.log(envId);
+  const envId = envIdInput.value;
+  console.log(`Env: ${envId}`);
   restartPHP(envId);
 });
