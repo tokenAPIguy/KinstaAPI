@@ -23,7 +23,7 @@ async function fetchSiteList(companyId) {
 }
 
 // Fetch Site by ID
-async function fetchSiteByID(siteId) {
+export async function fetchSiteByID(siteId) {
   const res = await fetch(
     `https://api.kinsta.com/v2/sites/${siteId}`,
 
@@ -34,17 +34,16 @@ async function fetchSiteByID(siteId) {
       },
     }
   );
-
   try {
     const data = await res.json();
-    console.log(data);
+    return data;
   } catch (error) {
     console.error(error);
   }
 }
 
 // Clear Kinsta Cache
-async function clearKinstaCache(envId) {
+export async function clearKinstaCache(envId) {
   const res = await fetch(`https://api.kinsta.com/v2/sites/tools/clear-cache`, {
     method: "POST",
     headers: {
@@ -65,7 +64,7 @@ async function clearKinstaCache(envId) {
 }
 
 // Restart PHP
-async function restartPHP(envId) {
+export async function restartPHP(envId) {
   const res = await fetch(`https://api.kinsta.com/v2/sites/tools/restart-php`, {
     method: "POST",
     headers: {

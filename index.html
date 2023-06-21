@@ -9,18 +9,24 @@
       src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
       defer
     ></script>
-    <script src="fetchData.js" defer></script>
-    <script src="main.js" defer></script>
+    <script type="module" src="fetchData.js" defer></script>
+    <script type="module" src="main.js" defer></script>
   </head>
   <body>
-    <input id="companyID" type="text" placeholder="Company ID" />
+    <h1>Details</h1>
+    <p><span id="company-id"></span></p>
+    <p><span id="name"></span></p>
+    <p><span id="status"></span></p>
+    <div id="environments"></div>
+    <input
+      class="details"
+      id="companyID"
+      type="text"
+      placeholder="Company ID"
+    />
     <button id="fetchCompany">Fetch</button>
 
-    <input id="siteID" type="text" placeholder="Site ID" />
+    <input class="details" id="siteID" type="text" placeholder="Site ID" />
     <button id="fetchSite">Fetch</button>
-
-    <input id="envID" type="text" placeholder="Environment ID" />
-    <button id="clearCache">Clear Cache</button>
-    <button id="restartPHP">Restart PHP</button>
   </body>
 </html>
