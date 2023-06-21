@@ -2,7 +2,7 @@ const token =
   "3c4d168fa1725fe833d239c5221510445f4b8a5ffbc6cf06cdc742816886c5f7";
 
 // Fetch Site List
-async function fetchSiteList(companyId) {
+export async function fetchSiteList(companyId) {
   const res = await fetch(
     `https://api.kinsta.com/v2/sites?company=${companyId}`,
 
@@ -58,6 +58,7 @@ export async function clearKinstaCache(envId) {
   try {
     const data = await res.json();
     console.log(data);
+    return data;
   } catch (error) {
     console.error(error);
   }
@@ -78,7 +79,7 @@ export async function restartPHP(envId) {
 
   try {
     const data = await res.json();
-    console.log(data);
+    return data;
   } catch (error) {
     console.error(error);
   }

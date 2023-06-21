@@ -3,8 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kinsta API Test</title>
+    <title>Kinsta API</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
       defer
@@ -13,20 +19,25 @@
     <script type="module" src="main.js" defer></script>
   </head>
   <body>
-    <h1>Details</h1>
-    <p><span id="company-id"></span></p>
-    <p><span id="name"></span></p>
-    <p><span id="status"></span></p>
-    <div id="environments"></div>
-    <input
-      class="details"
-      id="companyID"
-      type="text"
-      placeholder="Company ID"
-    />
-    <button id="fetchCompany">Fetch</button>
+    <div class="container">
+      <div class="main-content">
+        <h1>Kinsta API</h1>
+        <h3>Details</h3>
+        <p><span id="company-id"></span></p>
+        <p><span id="name"></span></p>
+        <p><span id="status"></span></p>
+        <div id="environments"></div>
+        <input
+          class="details"
+          id="companyID"
+          type="text"
+          placeholder="Company ID"
+        />
+        <button id="fetchCompany">Fetch</button>
 
-    <input class="details" id="siteID" type="text" placeholder="Site ID" />
-    <button id="fetchSite">Fetch</button>
+        <input class="details" id="siteID" type="text" placeholder="Site ID" />
+        <button id="fetchSite">Fetch</button>
+      </div>
+    </div>
   </body>
 </html>

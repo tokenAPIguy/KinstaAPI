@@ -1,4 +1,9 @@
-import { fetchSiteByID, clearKinstaCache, restartPHP } from "./fetchData.js";
+import {
+  fetchSiteByID,
+  fetchSiteList,
+  clearKinstaCache,
+  restartPHP,
+} from "./fetchData.js";
 
 ////////////////////////////////////////////////////////////////
 // DOM Elements
@@ -8,10 +13,6 @@ const companyIdButton = document.getElementById("fetchCompany");
 
 const siteIdInput = document.getElementById("siteID");
 const siteIdButton = document.getElementById("fetchSite");
-
-const envIdInput = document.getElementById("envID");
-
-const restartPHPButton = document.getElementById("restartPHP");
 
 ////////////////////////////////////////////////////////////////
 // Fetch Site List by Company ID
@@ -57,9 +58,9 @@ siteIdButton.addEventListener("click", async () => {
 
       // Output to DOM
       const paragraph = document.createElement("p");
-      paragraph.innerHTML = `Env Name: ${display_name}<br>
+      paragraph.innerHTML = `<br>Env Name: ${display_name}<br>
       
-      &nbsp;&nbsp;&nbsp;&nbsp;ID: ${id}<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp;ID: ${id}<br>
       &nbsp;&nbsp;&nbsp;&nbsp;${name[0].toUpperCase() + name.slice(1)}<br> 
       &nbsp;&nbsp;&nbsp;&nbsp;Status: ${
         is_blocked ? "Blocked" : "Not Blocked"
@@ -67,21 +68,47 @@ siteIdButton.addEventListener("click", async () => {
       &nbsp;&nbsp;&nbsp;&nbsp;${is_premium ? "Premium" : "Not Premium"}<br>
       &nbsp;&nbsp;&nbsp;&nbsp;${link}`;
 
+      // Create Clear Cache Button
       const clearCacheButton = document.createElement("button");
+      clearCacheButton.className = "env-actions";
       clearCacheButton.textContent = "Clear Cache";
-      clearCacheButton.addEventListener("click", () => {
+
+      clearCacheButton.addEventListener("click", async () => {
         console.log(`Env: ${id}`);
-        clearKinstaCache(id);
+
+        try {
+          const data = await clearKinstaCache(id);
+          const { status, message, operation_id } = data;
+          console.log(data);
+          alert(
+            `HTTP ${status}\n\n${message}\n\nOperation ID: ${operation_id}`
+          );
+        } catch (error) {
+          console.error(error);
+        }
       });
 
+      // Create Restart PHP Button
       const restartPHPButton = document.createElement("button");
+      restartPHPButton.className = "env-actions";
       restartPHPButton.textContent = "Restart PHP";
-      restartPHPButton.addEventListener("click", () => {
+
+      restartPHPButton.addEventListener("click", async () => {
         console.log(`Env: ${id}`);
-        restartPHP(id);
+
+        try {
+          const data = await restartPHP(id);
+          const { status, message, operation_id } = data;
+          console.log(data);
+          alert(
+            `HTTP ${status}\n\n${message}\n\nOperation ID: ${operation_id}`
+          );
+        } catch (error) {
+          console.error(error);
+        }
       });
 
-      // Append "Clear Cache" button to the environment container
+      // Append elements to the environment container
       environmentsContainer.appendChild(paragraph);
       environmentsContainer.appendChild(clearCacheButton);
       environmentsContainer.appendChild(restartPHPButton);
@@ -90,5 +117,3 @@ siteIdButton.addEventListener("click", async () => {
     console.error(error);
   }
 });
-
-// Environment Actions

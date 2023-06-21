@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-family: "Fira Code", monospace;
+}
+a {
+  color: antiquewhite;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: rgb(178, 252, 255);
+}
+body {
+  background: #23222b;
+  color: antiquewhite;
+}
+.container {
+  display: flex;
+  padding: 1.5rem;
+}
+.env-actions {
+  padding: 5px;
+  cursor: pointer;
+}
