@@ -15,6 +15,7 @@ const companyIdButton = document.getElementById("fetchCompany");
 const siteIdInput = document.getElementById("siteID");
 const siteIdButton = document.getElementById("fetchSite");
 
+const tokenInput = document.getElementById("token");
 const submitTokenButton = document.getElementById("submitToken");
 
 ////////////////////////////////////////////////////////////////
@@ -23,7 +24,6 @@ const submitTokenButton = document.getElementById("submitToken");
 submitTokenButton.addEventListener("click", () => {
   const tokenValue = token.value;
   token.classList.remove("input");
-  console.log(tokenValue.length);
 
   if (tokenValue.length === 64) {
     token.classList.remove("reject");
@@ -34,6 +34,13 @@ submitTokenButton.addEventListener("click", () => {
   }
 });
 
+showHide.addEventListener("click", () => {
+  if (tokenInput.type === "text") {
+    tokenInput.type = "password";
+  } else {
+    tokenInput.type = "text";
+  }
+});
 ////////////////////////////////////////////////////////////////
 // Fetch Site List by Company ID
 ////////////////////////////////////////////////////////////////
@@ -133,4 +140,12 @@ siteIdButton.addEventListener("click", async () => {
   } catch (error) {
     console.error(error);
   }
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  // Clear fetchCompany input field
+  companyIdInput.value = "";
+
+  // Clear fetchSite input field
+  siteIdInput.value = "";
 });

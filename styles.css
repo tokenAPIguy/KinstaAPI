@@ -51,9 +51,6 @@ body {
   padding: 1.5rem;
   justify-content: center;
 }
-/* .details {
-  border-radius: 10px 0px 0px 10px;
-} */
 .env-action {
   border-radius: 10px;
 }
@@ -80,6 +77,9 @@ body {
 .row {
   display: flex;
 }
+.show-hide {
+  border-radius: 10px;
+}
 .token {
-  width: 800px;
+  width: 950px;
 }
