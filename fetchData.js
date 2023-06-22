@@ -1,5 +1,4 @@
-const token =
-  "3c4d168fa1725fe833d239c5221510445f4b8a5ffbc6cf06cdc742816886c5f7";
+export const token = document.getElementById("token");
 
 // Fetch Site List
 export async function fetchSiteList(companyId) {
@@ -9,7 +8,7 @@ export async function fetchSiteList(companyId) {
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token.value}`,
       },
     }
   );
@@ -30,7 +29,7 @@ export async function fetchSiteByID(siteId) {
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token.value}`,
       },
     }
   );
@@ -48,7 +47,7 @@ export async function clearKinstaCache(envId) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token.value}`,
     },
     body: JSON.stringify({
       environment_id: `${envId}`,
@@ -70,7 +69,7 @@ export async function restartPHP(envId) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token.value}`,
     },
     body: JSON.stringify({
       environment_id: `${envId}`,

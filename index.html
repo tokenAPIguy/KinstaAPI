@@ -21,22 +21,48 @@
   <body>
     <div class="container">
       <div class="main-content">
-        <h1>Kinsta API</h1>
-        <h3>Details</h3>
-        <p><span id="company-id"></span></p>
-        <p><span id="name"></span></p>
-        <p><span id="status"></span></p>
-        <div id="environments"></div>
+        <h1 class="page-header">Kinsta API</h1>
+        <br />
+        <h3>Token</h3>
         <input
-          class="details"
-          id="companyID"
           type="text"
-          placeholder="Company ID"
+          id="token"
+          class="token input"
+          placeholder="API Key"
         />
-        <button id="fetchCompany">Fetch</button>
-
-        <input class="details" id="siteID" type="text" placeholder="Site ID" />
-        <button id="fetchSite">Fetch</button>
+        <button class="button" id="submitToken">Submit</button>
+        <div class="container"></div>
+        <h2>WordPress Sites</h2>
+        <div class="row">
+          <div class="column">
+            <input
+              class="details input"
+              id="companyID"
+              type="text"
+              placeholder="Company ID"
+            />
+            <button class="button" id="fetchCompany">Fetch</button>
+            <h3 id="company-details"></h3>
+            <p><span id="site-id"></span></p>
+            <p><span id="name-company"></span></p>
+            <p><span id="status-company"></span></p>
+            <div id="environments-company"></div>
+          </div>
+          <div class="column">
+            <input
+              class="details input"
+              id="siteID"
+              type="text"
+              placeholder="Site ID"
+            />
+            <button class="button" id="fetchSite">Fetch</button>
+            <h3 id="site-details"></h3>
+            <p><span id="company-id"></span></p>
+            <p><span id="name-site"></span></p>
+            <p><span id="status-site"></span></p>
+            <div id="environments-site"></div>
+          </div>
+        </div>
       </div>
     </div>
   </body>

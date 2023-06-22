@@ -3,6 +3,7 @@ import {
   fetchSiteList,
   clearKinstaCache,
   restartPHP,
+  token,
 } from "./fetchData.js";
 
 ////////////////////////////////////////////////////////////////
@@ -13,6 +14,25 @@ const companyIdButton = document.getElementById("fetchCompany");
 
 const siteIdInput = document.getElementById("siteID");
 const siteIdButton = document.getElementById("fetchSite");
+
+const submitTokenButton = document.getElementById("submitToken");
+
+////////////////////////////////////////////////////////////////
+// Accept Token
+////////////////////////////////////////////////////////////////
+submitTokenButton.addEventListener("click", () => {
+  const tokenValue = token.value;
+  token.classList.remove("input");
+  console.log(tokenValue.length);
+
+  if (tokenValue.length === 64) {
+    token.classList.remove("reject");
+    token.classList.add("accept");
+  } else {
+    token.classList.remove("accept");
+    token.classList.add("reject");
+  }
+});
 
 ////////////////////////////////////////////////////////////////
 // Fetch Site List by Company ID
@@ -37,14 +57,15 @@ siteIdButton.addEventListener("click", async () => {
     console.log(data);
 
     // Output generic site details to DOM
+    document.getElementById("site-details").textContent = "Details";
     document.getElementById(
       "company-id"
     ).textContent = `Company ID: ${company_id}`;
-    document.getElementById("name").textContent = `Name: ${name}`;
-    document.getElementById("status").textContent = `Status: ${status}`;
+    document.getElementById("name-site").textContent = `Name: ${name}`;
+    document.getElementById("status-site").textContent = `Status: ${status}`;
 
     // Create container for environments
-    const environmentsContainer = document.getElementById("environments");
+    const environmentsContainer = document.getElementById("environments-site");
     environmentsContainer.innerHTML = "";
 
     // Destructure Environments Array
@@ -70,12 +91,10 @@ siteIdButton.addEventListener("click", async () => {
 
       // Create Clear Cache Button
       const clearCacheButton = document.createElement("button");
-      clearCacheButton.className = "env-actions";
+      clearCacheButton.classList.add("button", "env-action");
       clearCacheButton.textContent = "Clear Cache";
 
       clearCacheButton.addEventListener("click", async () => {
-        console.log(`Env: ${id}`);
-
         try {
           const data = await clearKinstaCache(id);
           const { status, message, operation_id } = data;
@@ -90,12 +109,10 @@ siteIdButton.addEventListener("click", async () => {
 
       // Create Restart PHP Button
       const restartPHPButton = document.createElement("button");
-      restartPHPButton.className = "env-actions";
+      restartPHPButton.classList.add("button", "env-action");
       restartPHPButton.textContent = "Restart PHP";
 
       restartPHPButton.addEventListener("click", async () => {
-        console.log(`Env: ${id}`);
-
         try {
           const data = await restartPHP(id);
           const { status, message, operation_id } = data;

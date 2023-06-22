@@ -4,23 +4,82 @@
 }
 html {
   font-family: "Fira Code", monospace;
+  font-size: 1.1em;
 }
 a {
   color: antiquewhite;
   transition: color 0.3s ease;
 }
 a:hover {
-  color: rgb(178, 252, 255);
+  color: #94a3b8;
 }
 body {
-  background: #23222b;
+  background: #1e293b;
   color: antiquewhite;
+}
+.accept {
+  border: solid 1px #32f392;
+  border-radius: 10px 0px 0px 10px;
+  width: 500px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: #0f172a;
+}
+.button {
+  padding: 10px;
+  margin: 10px 10px 10px 0px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: antiquewhite;
+  background: #0f172a;
+  border: none;
+  border-radius: 0px 10px 10px 0px;
+  transition: background 0.3s ease;
+}
+.button:hover {
+  background: #334155;
+}
+.column {
+  flex: 50%;
+  justify-content: center;
 }
 .container {
   display: flex;
   padding: 1.5rem;
+  justify-content: center;
 }
-.env-actions {
-  padding: 5px;
-  cursor: pointer;
+/* .details {
+  border-radius: 10px 0px 0px 10px;
+} */
+.env-action {
+  border-radius: 10px;
+}
+.input {
+  padding: 10px;
+  font-family: inherit;
+  font-size: inherit;
+  color: antiquewhite;
+  background: #0f172a;
+  border: none;
+  border-radius: 10px 0px 0px 10px;
+  width: 500px;
+}
+.reject {
+  border: solid 1px #f33232;
+  border-radius: 10px 0px 0px 10px;
+  width: 500px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: #0f172a;
+}
+.row {
+  display: flex;
+}
+.token {
+  width: 800px;
 }
