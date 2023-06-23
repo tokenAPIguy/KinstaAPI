@@ -46,9 +46,41 @@ showHide.addEventListener("click", () => {
 ////////////////////////////////////////////////////////////////
 
 // Create aynchronous event listener that waits for response from fetchSiteList()
-companyIdButton.addEventListener("click", () => {
+companyIdButton.addEventListener("click", async () => {
   const companyId = companyIdInput.value;
-  fetchSiteList(companyId);
+  try {
+    const data = await fetchSiteList(companyId);
+    const { sites } = data.company;
+    document.getElementById("company-details").textContent = "Details";
+
+    // Create container for environments
+    const environmentsContainer = document.getElementById(
+      "environments-company"
+    );
+    environmentsContainer.innerHTML = "";
+
+    // Destructure Sites Array
+    sites.forEach((site) => {
+      const { display_name, name, id } = site;
+      console.log(site);
+
+      // Creating Link
+      const url = `https://my.kinsta.com/sites?idCompany=${companyId}`;
+      const link = `<a href="${url}" target="_blank" rel="noopener noreferrer">MyKinsta</a>`;
+
+      // Output to DOM
+      const paragraph = document.createElement("p");
+      paragraph.innerHTML = `<br>${display_name}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Site name: ${name}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Site ID: ${id}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;${link}
+      `;
+
+      environmentsContainer.appendChild(paragraph);
+    });
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 ////////////////////////////////////////////////////////////////
@@ -61,13 +93,13 @@ siteIdButton.addEventListener("click", async () => {
   try {
     const data = await fetchSiteByID(siteId);
     const { company_id, name, status, environments } = data.site;
-    console.log(data);
 
     // Output generic site details to DOM
     document.getElementById("site-details").textContent = "Details";
+
     document.getElementById(
       "company-id"
-    ).textContent = `Company ID: ${company_id}`;
+    ).innerHTML = `<br>Company ID: ${company_id}`;
     document.getElementById("name-site").textContent = `Name: ${name}`;
     document.getElementById("status-site").textContent = `Status: ${status}`;
 
@@ -87,7 +119,6 @@ siteIdButton.addEventListener("click", async () => {
       // Output to DOM
       const paragraph = document.createElement("p");
       paragraph.innerHTML = `<br>Env Name: ${display_name}<br>
-      
       &nbsp;&nbsp;&nbsp;&nbsp;ID: ${id}<br>
       &nbsp;&nbsp;&nbsp;&nbsp;${name[0].toUpperCase() + name.slice(1)}<br> 
       &nbsp;&nbsp;&nbsp;&nbsp;Status: ${
