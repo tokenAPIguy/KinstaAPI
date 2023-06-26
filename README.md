@@ -13,16 +13,3 @@
 <a href="https://kinsta.com/docs/kinsta-api-intro/">Kinsta API Documentation</a>
   <br />
 <a href="https://api-docs.kinsta.com/#section/Introduction">Kinsta API Reference</a>
-
-<h3>Technologies Used:</h3>
-<ul>
-  <li>
-   HTML
-  </li>
-  <li>
-   CSS
-  </li>
-  <li>
-   JavaScript
-  </li>
-</ul>
