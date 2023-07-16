@@ -2,6 +2,7 @@ import {
   fetchSiteByID,
   fetchSiteList,
   clearKinstaCache,
+  clearEdge,
   restartPHP,
   token,
 } from "./fetchData.js";
@@ -109,7 +110,14 @@ siteIdButton.addEventListener("click", async () => {
 
     // Destructure Environments Array
     environments.forEach((environment) => {
-      const { display_name, name, id, is_blocked, is_premium } = environment;
+      const {
+        display_name,
+        primaryDomain: { name: domain },
+        name: environmentName,
+        id,
+        is_blocked,
+        is_premium,
+      } = environment;
       console.log(environment);
 
       // Creating Link
@@ -119,8 +127,11 @@ siteIdButton.addEventListener("click", async () => {
       // Output to DOM
       const paragraph = document.createElement("p");
       paragraph.innerHTML = `<br>Env Name: ${display_name}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Primary Domain: <a href =https://${domain}>${domain}</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;ID: ${id}<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;${name[0].toUpperCase() + name.slice(1)}<br> 
+      &nbsp;&nbsp;&nbsp;&nbsp;${
+        environmentName[0].toUpperCase() + environmentName.slice(1)
+      }<br> 
       &nbsp;&nbsp;&nbsp;&nbsp;Status: ${
         is_blocked ? "Blocked" : "Not Blocked"
       }<br>
@@ -135,6 +146,24 @@ siteIdButton.addEventListener("click", async () => {
       clearCacheButton.addEventListener("click", async () => {
         try {
           const data = await clearKinstaCache(id);
+          const { status, message, operation_id } = data;
+          console.log(data);
+          alert(
+            `HTTP ${status}\n\n${message}\n\nOperation ID: ${operation_id}`
+          );
+        } catch (error) {
+          console.error(error);
+        }
+      });
+
+      // Create Clear Edge Button
+      const clearEdgeButton = document.createElement("button");
+      clearEdgeButton.classList.add("button", "env-action");
+      clearEdgeButton.textContent = "Clear Edge";
+
+      clearEdgeButton.addEventListener("click", async () => {
+        try {
+          const data = await clearEdge(id);
           const { status, message, operation_id } = data;
           console.log(data);
           alert(
@@ -166,6 +195,7 @@ siteIdButton.addEventListener("click", async () => {
       // Append elements to the environment container
       environmentsContainer.appendChild(paragraph);
       environmentsContainer.appendChild(clearCacheButton);
+      environmentsContainer.appendChild(clearEdgeButton);
       environmentsContainer.appendChild(restartPHPButton);
     });
   } catch (error) {

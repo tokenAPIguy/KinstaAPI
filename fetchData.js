@@ -63,6 +63,30 @@ export async function clearKinstaCache(envId) {
   }
 }
 
+// Clear Edge Cache
+export async function clearEdge(envId) {
+  const res = await fetch(
+    `https://api.kinsta.com/v2/sites/edge-caching/clear`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.value}`,
+      },
+      body: JSON.stringify({
+        environment_id: `${envId}`,
+      }),
+    }
+  );
+
+  try {
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // Restart PHP
 export async function restartPHP(envId) {
   const res = await fetch(`https://api.kinsta.com/v2/sites/tools/restart-php`, {
